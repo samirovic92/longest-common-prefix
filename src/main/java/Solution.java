@@ -1,25 +1,16 @@
-import java.util.Arrays;
 
 public class Solution {
 
     public String longestCommonPrefix(String[] strs) {
-        Arrays.sort(strs);
-        if( strs[0].equals("")) return "";
-        if (strs.length == 1) return  strs[0];
 
-        int i = 0;
-        String commonPrefix = "";
-        while (true) {
-            if ( i>= strs[0].length() ) return  commonPrefix;
-
-            commonPrefix += Character.toString(strs[0].charAt(i));
-            for ( String str : strs ) {
-                if( !str.startsWith(commonPrefix)) {
-                    return commonPrefix.substring(0, commonPrefix.length() - 1);
-                }
+        String prefix = strs[0];
+        for( int i = 1; i< strs.length; i++) {
+            while ( !strs[i].startsWith(prefix)) {
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if (prefix.isEmpty()) return "";
             }
-            i++;
         }
+        return prefix;
     }
 
 }
